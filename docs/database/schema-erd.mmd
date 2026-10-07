@@ -1,0 +1,726 @@
+erDiagram
+    direction LR
+    appointment_history {
+        UUID appointment_id FK
+        UUID actor_id FK
+        VARCHAR_80 action
+        TEXT reason
+        JSONB event_data
+        UUID tenant_id PK
+        UUID id PK
+        TIMESTAMP_WITH_TIME_ZONE created_at
+    }
+    appointment_items {
+        UUID appointment_id FK
+        UUID original_employee_id FK
+        UUID line_id FK
+        UUID service_id FK
+        INTEGER position
+        VARCHAR_160 service_name
+        VARCHAR_120 line_name
+        VARCHAR_160 employee_name
+        INTEGER duration_minutes
+        INTEGER buffer_before_minutes
+        INTEGER buffer_after_minutes
+        BIGINT amount
+        UUID tenant_id PK
+        UUID id PK
+        TIMESTAMP_WITH_TIME_ZONE created_at
+    }
+    appointments {
+        UUID customer_id FK
+        UUID employee_id FK
+        UUID line_id FK
+        VARCHAR_16 status
+        TIMESTAMP_WITH_TIME_ZONE starts_at
+        TIMESTAMP_WITH_TIME_ZONE ends_at
+        TIMESTAMP_WITH_TIME_ZONE occupied_starts_at
+        TIMESTAMP_WITH_TIME_ZONE occupied_ends_at
+        TSTZRANGE occupied_period
+        INTEGER duration_minutes
+        INTEGER buffer_before_minutes
+        INTEGER buffer_after_minutes
+        BIGINT total_amount
+        VARCHAR_3 currency
+        BOOLEAN is_test
+        TIMESTAMP_WITH_TIME_ZONE hold_expires_at
+        TIMESTAMP_WITH_TIME_ZONE confirmed_at
+        TIMESTAMP_WITH_TIME_ZONE cancelled_at
+        TEXT cancellation_reason
+        JSONB policy_snapshot
+        INTEGER version
+        UUID tenant_id PK
+        UUID id PK
+        TIMESTAMP_WITH_TIME_ZONE created_at
+        TIMESTAMP_WITH_TIME_ZONE updated_at
+    }
+    audit_logs {
+        VARCHAR_10 actor_kind
+        UUID actor_id FK
+        UUID platform_actor_id FK
+        VARCHAR_100 action
+        VARCHAR_80 entity_type
+        UUID entity_id
+        UUID request_id
+        INET ip_address
+        TEXT reason
+        JSONB event_data
+        UUID tenant_id PK
+        UUID id PK
+        TIMESTAMP_WITH_TIME_ZONE created_at
+    }
+    auth_throttles {
+        BYTEA bucket_hash
+        VARCHAR_32 purpose
+        INTEGER attempts
+        TIMESTAMP_WITH_TIME_ZONE blocked_until
+        TIMESTAMP_WITH_TIME_ZONE expires_at
+        UUID tenant_id PK
+        UUID id PK
+        TIMESTAMP_WITH_TIME_ZONE created_at
+        TIMESTAMP_WITH_TIME_ZONE updated_at
+    }
+    auth_tokens {
+        UUID user_id FK
+        VARCHAR_18 purpose
+        BYTEA token_hash
+        INTEGER subject_version
+        TIMESTAMP_WITH_TIME_ZONE expires_at
+        TIMESTAMP_WITH_TIME_ZONE consumed_at
+        UUID tenant_id PK
+        UUID id PK
+        TIMESTAMP_WITH_TIME_ZONE created_at
+    }
+    background_jobs {
+        UUID outbox_event_id FK
+        VARCHAR_100 kind
+        VARCHAR_180 deduplication_key
+        JSONB payload
+        VARCHAR_9 status
+        INTEGER attempts
+        INTEGER max_attempts
+        TIMESTAMP_WITH_TIME_ZONE run_after
+        UUID lease_owner
+        TIMESTAMP_WITH_TIME_ZONE lease_until
+        VARCHAR_100 last_error_code
+        UUID tenant_id PK
+        UUID id PK
+        TIMESTAMP_WITH_TIME_ZONE created_at
+        TIMESTAMP_WITH_TIME_ZONE updated_at
+    }
+    calendar_controls {
+        INTEGER version
+        UUID tenant_id PK
+        UUID id PK
+        TIMESTAMP_WITH_TIME_ZONE created_at
+        TIMESTAMP_WITH_TIME_ZONE updated_at
+    }
+    calendars {
+        VARCHAR_13 scope
+        UUID line_id FK
+        UUID employee_id FK
+        UUID tenant_id PK
+        UUID id PK
+        TIMESTAMP_WITH_TIME_ZONE created_at
+        TIMESTAMP_WITH_TIME_ZONE updated_at
+    }
+    callback_events {
+        UUID attempt_id FK
+        VARCHAR_180 provider_event_id
+        VARCHAR_32 outcome
+        JSONB safe_payload
+        UUID tenant_id PK
+        UUID id PK
+        TIMESTAMP_WITH_TIME_ZONE created_at
+    }
+    credit_notes {
+        UUID refund_id FK
+        VARCHAR_64 number
+        TIMESTAMP_WITH_TIME_ZONE issued_at
+        UUID tenant_id PK
+        UUID id PK
+        TIMESTAMP_WITH_TIME_ZONE created_at
+    }
+    customer_profiles {
+        UUID user_id FK
+        VARCHAR_32 contact_preference
+        UUID tenant_id PK
+        UUID id PK
+        TIMESTAMP_WITH_TIME_ZONE created_at
+        TIMESTAMP_WITH_TIME_ZONE updated_at
+    }
+    day_overrides {
+        UUID calendar_id FK
+        DATE local_date
+        VARCHAR_7 mode
+        VARCHAR_300 reason
+        UUID tenant_id PK
+        UUID id PK
+        TIMESTAMP_WITH_TIME_ZONE created_at
+        TIMESTAMP_WITH_TIME_ZONE updated_at
+    }
+    employee_lines {
+        UUID employee_id FK
+        UUID line_id FK
+        BOOLEAN is_active
+        UUID tenant_id PK
+        UUID id PK
+        TIMESTAMP_WITH_TIME_ZONE created_at
+        TIMESTAMP_WITH_TIME_ZONE updated_at
+        TIMESTAMP_WITH_TIME_ZONE deleted_at
+    }
+    employee_profiles {
+        UUID user_id FK
+        VARCHAR_160 public_name
+        BOOLEAN is_active
+        UUID tenant_id PK
+        UUID id PK
+        TIMESTAMP_WITH_TIME_ZONE created_at
+        TIMESTAMP_WITH_TIME_ZONE updated_at
+        TIMESTAMP_WITH_TIME_ZONE deleted_at
+    }
+    employee_services {
+        UUID employee_id FK
+        UUID line_id FK
+        UUID service_id FK
+        BOOLEAN is_active
+        UUID tenant_id PK
+        UUID id PK
+        TIMESTAMP_WITH_TIME_ZONE created_at
+        TIMESTAMP_WITH_TIME_ZONE updated_at
+        TIMESTAMP_WITH_TIME_ZONE deleted_at
+    }
+    financial_entries {
+        VARCHAR_8 kind
+        UUID transaction_id FK
+        BIGINT captured_amount FK
+        UUID refund_id FK
+        BIGINT amount FK
+        VARCHAR_3 currency FK
+        BOOLEAN is_test FK
+        TIMESTAMP_WITH_TIME_ZONE booked_at
+        UUID tenant_id PK
+        UUID id PK
+        TIMESTAMP_WITH_TIME_ZONE created_at
+    }
+    idempotency_records {
+        UUID actor_id FK
+        VARCHAR_100 operation
+        VARCHAR_128 key
+        BYTEA request_hash
+        VARCHAR_16 state
+        INTEGER response_status
+        JSONB response_body
+        TIMESTAMP_WITH_TIME_ZONE expires_at
+        UUID tenant_id PK
+        UUID id PK
+        TIMESTAMP_WITH_TIME_ZONE created_at
+        TIMESTAMP_WITH_TIME_ZONE updated_at
+    }
+    invoice_items {
+        UUID invoice_id FK
+        UUID appointment_id FK
+        UUID appointment_item_id FK
+        INTEGER position
+        VARCHAR_200 description
+        BIGINT amount
+        UUID tenant_id PK
+        UUID id PK
+        TIMESTAMP_WITH_TIME_ZONE created_at
+    }
+    invoices {
+        UUID appointment_id FK
+        VARCHAR_64 number
+        BIGINT total_amount FK
+        VARCHAR_3 currency FK
+        BOOLEAN is_test FK
+        TIMESTAMP_WITH_TIME_ZONE issued_at
+        JSONB seller_snapshot
+        JSONB buyer_snapshot
+        UUID tenant_id PK
+        UUID id PK
+        TIMESTAMP_WITH_TIME_ZONE created_at
+    }
+    line_services {
+        UUID line_id FK
+        UUID service_id FK
+        BIGINT price_amount
+        VARCHAR_3 currency
+        INTEGER duration_minutes
+        INTEGER buffer_before_minutes
+        INTEGER buffer_after_minutes
+        BOOLEAN is_free
+        BOOLEAN is_active
+        UUID tenant_id PK
+        UUID id PK
+        TIMESTAMP_WITH_TIME_ZONE created_at
+        TIMESTAMP_WITH_TIME_ZONE updated_at
+        TIMESTAMP_WITH_TIME_ZONE deleted_at
+    }
+    lines {
+        VARCHAR_120 name
+        VARCHAR_100 slug
+        BOOLEAN is_active
+        UUID tenant_id PK
+        UUID id PK
+        TIMESTAMP_WITH_TIME_ZONE created_at
+        TIMESTAMP_WITH_TIME_ZONE updated_at
+        TIMESTAMP_WITH_TIME_ZONE deleted_at
+    }
+    mock_orders {
+        UUID account_id FK
+        VARCHAR_128 request_key
+        VARCHAR_160 merchant
+        BIGINT amount
+        VARCHAR_3 currency
+        VARCHAR_16 status
+        VARCHAR_32 scenario
+        INTEGER unknown_reads
+        TIMESTAMP_WITH_TIME_ZONE received_at
+        UUID tenant_id PK
+        UUID id PK
+        TIMESTAMP_WITH_TIME_ZONE created_at
+        TIMESTAMP_WITH_TIME_ZONE updated_at
+    }
+    mock_refunds {
+        UUID order_id FK
+        VARCHAR_128 request_key
+        BIGINT amount
+        UUID tenant_id PK
+        UUID id PK
+        TIMESTAMP_WITH_TIME_ZONE created_at
+    }
+    notifications {
+        UUID user_id FK
+        VARCHAR_80 kind
+        VARCHAR_180 title
+        TEXT body
+        VARCHAR_180 deduplication_key
+        TIMESTAMP_WITH_TIME_ZONE read_at
+        UUID tenant_id PK
+        UUID id PK
+        TIMESTAMP_WITH_TIME_ZONE created_at
+        TIMESTAMP_WITH_TIME_ZONE updated_at
+    }
+    outbox_events {
+        VARCHAR_100 event_type
+        UUID aggregate_id
+        VARCHAR_180 deduplication_key
+        JSONB payload
+        UUID tenant_id PK
+        UUID id PK
+        TIMESTAMP_WITH_TIME_ZONE created_at
+    }
+    payment_accounts {
+        VARCHAR_40 provider
+        VARCHAR_160 merchant_reference
+        VARCHAR_255 secret_ref
+        BOOLEAN is_test
+        BOOLEAN is_active
+        UUID tenant_id PK
+        UUID id PK
+        TIMESTAMP_WITH_TIME_ZONE created_at
+        TIMESTAMP_WITH_TIME_ZONE updated_at
+    }
+    payment_allocations {
+        UUID intent_id FK
+        UUID transaction_id FK
+        BIGINT amount FK
+        VARCHAR_3 currency FK
+        BOOLEAN is_test FK
+        UUID tenant_id PK
+        UUID id PK
+        TIMESTAMP_WITH_TIME_ZONE created_at
+    }
+    payment_attempts {
+        UUID intent_id FK
+        UUID account_id FK
+        BIGINT amount FK
+        VARCHAR_3 currency FK
+        BOOLEAN is_test FK
+        VARCHAR_23 status
+        VARCHAR_128 request_key
+        VARCHAR_180 gateway_order_id
+        TIMESTAMP_WITH_TIME_ZONE next_check_at
+        TIMESTAMP_WITH_TIME_ZONE verified_at
+        VARCHAR_80 failure_code
+        JSONB safe_response
+        UUID tenant_id PK
+        UUID id PK
+        TIMESTAMP_WITH_TIME_ZONE created_at
+        TIMESTAMP_WITH_TIME_ZONE updated_at
+    }
+    payment_intents {
+        UUID appointment_id FK
+        BIGINT amount FK
+        VARCHAR_3 currency FK
+        BOOLEAN is_test FK
+        VARCHAR_23 status
+        TIMESTAMP_WITH_TIME_ZONE expires_at
+        UUID tenant_id PK
+        UUID id PK
+        TIMESTAMP_WITH_TIME_ZONE created_at
+        TIMESTAMP_WITH_TIME_ZONE updated_at
+    }
+    payment_transactions {
+        UUID attempt_id FK
+        UUID intent_id FK
+        UUID account_id FK
+        BIGINT amount
+        VARCHAR_3 currency FK
+        BOOLEAN is_test FK
+        VARCHAR_180 gateway_transaction_id
+        TIMESTAMP_WITH_TIME_ZONE received_at
+        TIMESTAMP_WITH_TIME_ZONE verified_at
+        JSONB evidence
+        UUID tenant_id PK
+        UUID id PK
+        TIMESTAMP_WITH_TIME_ZONE created_at
+    }
+    permissions {
+        VARCHAR_100 code PK
+        TEXT description
+    }
+    platform_audit_logs {
+        UUID actor_id FK
+        VARCHAR_100 action
+        UUID entity_id
+        JSONB event_data
+        UUID id PK
+        TIMESTAMP_WITH_TIME_ZONE created_at
+    }
+    platform_auth_throttles {
+        BYTEA key PK
+        INTEGER attempts
+        TIMESTAMP_WITH_TIME_ZONE expires_at
+    }
+    platform_role_assignments {
+        UUID role_id FK
+        UUID user_id FK
+        UUID id PK
+        TIMESTAMP_WITH_TIME_ZONE created_at
+    }
+    platform_role_permissions {
+        UUID role_id FK
+        VARCHAR_100 permission_code FK
+        UUID id PK
+        TIMESTAMP_WITH_TIME_ZONE created_at
+    }
+    platform_roles {
+        VARCHAR_80 code
+        UUID id PK
+        TIMESTAMP_WITH_TIME_ZONE created_at
+        TIMESTAMP_WITH_TIME_ZONE updated_at
+    }
+    platform_sessions {
+        UUID user_id FK
+        BYTEA token_hash
+        BYTEA csrf_hash
+        TIMESTAMP_WITH_TIME_ZONE expires_at
+        TIMESTAMP_WITH_TIME_ZONE idle_expires_at
+        TIMESTAMP_WITH_TIME_ZONE revoked_at
+        UUID id PK
+        TIMESTAMP_WITH_TIME_ZONE created_at
+        TIMESTAMP_WITH_TIME_ZONE updated_at
+    }
+    platform_users {
+        VARCHAR_254 email_normalized
+        VARCHAR_16 phone_normalized
+        VARCHAR_160 display_name
+        VARCHAR_512 password_hash
+        VARCHAR_255 mfa_secret_ref
+        BOOLEAN is_active
+        UUID id PK
+        TIMESTAMP_WITH_TIME_ZONE created_at
+        TIMESTAMP_WITH_TIME_ZONE updated_at
+    }
+    receipts {
+        UUID transaction_id FK
+        VARCHAR_64 number
+        BIGINT amount FK
+        VARCHAR_3 currency FK
+        BOOLEAN is_test FK
+        TIMESTAMP_WITH_TIME_ZONE issued_at
+        UUID tenant_id PK
+        UUID id PK
+        TIMESTAMP_WITH_TIME_ZONE created_at
+    }
+    refunds {
+        UUID transaction_id FK
+        BIGINT captured_amount FK
+        BIGINT amount
+        VARCHAR_3 currency FK
+        BOOLEAN is_test FK
+        VARCHAR_23 status
+        VARCHAR_128 request_key
+        VARCHAR_180 gateway_refund_id
+        UUID requested_by_id FK
+        UUID approved_by_id FK
+        TEXT reason
+        TIMESTAMP_WITH_TIME_ZONE succeeded_at
+        TIMESTAMP_WITH_TIME_ZONE next_check_at
+        UUID tenant_id PK
+        UUID id PK
+        TIMESTAMP_WITH_TIME_ZONE created_at
+        TIMESTAMP_WITH_TIME_ZONE updated_at
+    }
+    role_assignments {
+        UUID user_id FK
+        UUID role_id FK
+        VARCHAR_10 scope
+        UUID line_id FK
+        UUID granted_by_id FK
+        TIMESTAMP_WITH_TIME_ZONE revoked_at
+        UUID tenant_id PK
+        UUID id PK
+        TIMESTAMP_WITH_TIME_ZONE created_at
+        TIMESTAMP_WITH_TIME_ZONE updated_at
+    }
+    role_permissions {
+        UUID role_id FK
+        VARCHAR_100 permission_code FK
+        UUID tenant_id PK
+        UUID id PK
+        TIMESTAMP_WITH_TIME_ZONE created_at
+    }
+    roles {
+        VARCHAR_80 code
+        VARCHAR_120 name
+        BOOLEAN is_system
+        UUID tenant_id PK
+        UUID id PK
+        TIMESTAMP_WITH_TIME_ZONE created_at
+        TIMESTAMP_WITH_TIME_ZONE updated_at
+        TIMESTAMP_WITH_TIME_ZONE deleted_at
+    }
+    salon_settings {
+        VARCHAR_3 currency
+        INTEGER hold_minutes
+        INTEGER slot_step_minutes
+        INTEGER min_notice_minutes
+        INTEGER booking_horizon_days
+        INTEGER cancel_before_minutes
+        INTEGER max_services
+        INTEGER max_duration_minutes
+        INTEGER policy_version
+        INTEGER no_show_grace_minutes
+        UUID tenant_id PK
+        UUID id PK
+        TIMESTAMP_WITH_TIME_ZONE created_at
+        TIMESTAMP_WITH_TIME_ZONE updated_at
+    }
+    salons {
+        VARCHAR_160 name
+        VARCHAR_80 timezone
+        VARCHAR_16 status
+        UUID id PK
+        TIMESTAMP_WITH_TIME_ZONE created_at
+        TIMESTAMP_WITH_TIME_ZONE updated_at
+    }
+    schedule_blocks {
+        UUID calendar_id FK
+        VARCHAR_7 kind
+        VARCHAR_9 status
+        TIMESTAMP_WITH_TIME_ZONE starts_at
+        TIMESTAMP_WITH_TIME_ZONE ends_at
+        UUID requested_by_id FK
+        UUID approved_by_id FK
+        TEXT reason
+        UUID tenant_id PK
+        UUID id PK
+        TIMESTAMP_WITH_TIME_ZONE created_at
+        TIMESTAMP_WITH_TIME_ZONE updated_at
+    }
+    services {
+        VARCHAR_80 code
+        VARCHAR_160 name
+        TEXT description
+        BOOLEAN is_active
+        UUID tenant_id PK
+        UUID id PK
+        TIMESTAMP_WITH_TIME_ZONE created_at
+        TIMESTAMP_WITH_TIME_ZONE updated_at
+        TIMESTAMP_WITH_TIME_ZONE deleted_at
+    }
+    sessions {
+        UUID user_id FK
+        BYTEA token_hash
+        BYTEA csrf_hash
+        TIMESTAMP_WITH_TIME_ZONE expires_at
+        TIMESTAMP_WITH_TIME_ZONE idle_expires_at
+        TIMESTAMP_WITH_TIME_ZONE last_seen_at
+        TIMESTAMP_WITH_TIME_ZONE revoked_at
+        INTEGER auth_version
+        VARCHAR_64 grants_fingerprint
+        INET ip_address
+        VARCHAR_512 user_agent
+        UUID tenant_id PK
+        UUID id PK
+        TIMESTAMP_WITH_TIME_ZONE created_at
+        TIMESTAMP_WITH_TIME_ZONE updated_at
+    }
+    special_periods {
+        UUID override_id FK
+        VARCHAR_7 override_mode FK
+        INTEGER start_minute
+        INTEGER end_minute
+        UUID tenant_id PK
+        UUID id PK
+        TIMESTAMP_WITH_TIME_ZONE created_at
+        TIMESTAMP_WITH_TIME_ZONE updated_at
+    }
+    support_grants {
+        UUID platform_user_id FK
+        TEXT reason
+        TIMESTAMP_WITH_TIME_ZONE expires_at
+        TIMESTAMP_WITH_TIME_ZONE revoked_at
+        UUID tenant_id PK
+        UUID id PK
+        TIMESTAMP_WITH_TIME_ZONE created_at
+    }
+    tenant_domains {
+        UUID tenant_id FK
+        VARCHAR_253 hostname
+        TIMESTAMP_WITH_TIME_ZONE verified_at
+        BOOLEAN is_active
+        UUID id PK
+        TIMESTAMP_WITH_TIME_ZONE created_at
+        TIMESTAMP_WITH_TIME_ZONE updated_at
+    }
+    users {
+        VARCHAR_254 email_normalized
+        VARCHAR_512 password_hash
+        VARCHAR_255 mfa_secret_ref
+        VARCHAR_160 display_name
+        VARCHAR_24 phone
+        VARCHAR_16 phone_normalized
+        TIMESTAMP_WITH_TIME_ZONE phone_verified_at
+        TIMESTAMP_WITH_TIME_ZONE email_verified_at
+        BOOLEAN is_active
+        INTEGER auth_version
+        UUID tenant_id PK
+        UUID id PK
+        TIMESTAMP_WITH_TIME_ZONE created_at
+        TIMESTAMP_WITH_TIME_ZONE updated_at
+        TIMESTAMP_WITH_TIME_ZONE deleted_at
+    }
+    weekly_periods {
+        UUID calendar_id FK
+        VARCHAR_8 kind
+        INTEGER weekday
+        INTEGER start_minute
+        INTEGER end_minute
+        DATE valid_from
+        DATE valid_until
+        UUID tenant_id PK
+        UUID id PK
+        TIMESTAMP_WITH_TIME_ZONE created_at
+        TIMESTAMP_WITH_TIME_ZONE updated_at
+    }
+    users o|--o{ appointment_history : "actor_id"
+    appointments ||--o{ appointment_history : "appointment_id"
+    salons ||--o{ appointment_history : "tenant_id"
+    appointments ||--o{ appointment_items : "appointment_id,line_id"
+    employee_services ||--o{ appointment_items : "original_employee_id,line_id,service_id"
+    salons ||--o{ appointment_items : "tenant_id"
+    customer_profiles ||--o{ appointments : "customer_id"
+    employee_lines ||--o{ appointments : "employee_id,line_id"
+    salons ||--o{ appointments : "tenant_id"
+    platform_users o|--o{ audit_logs : "platform_actor_id"
+    users o|--o{ audit_logs : "actor_id"
+    salons ||--o{ audit_logs : "tenant_id"
+    salons ||--o{ auth_throttles : "tenant_id"
+    salons ||--o{ auth_tokens : "tenant_id"
+    users ||--o{ auth_tokens : "user_id"
+    outbox_events o|--o{ background_jobs : "outbox_event_id"
+    salons ||--o{ background_jobs : "tenant_id"
+    salons ||--o| calendar_controls : "tenant_id"
+    employee_profiles o|--o{ calendars : "employee_id"
+    employee_lines o|--o{ calendars : "employee_id,line_id"
+    lines o|--o{ calendars : "line_id"
+    salons ||--o{ calendars : "tenant_id"
+    payment_attempts ||--o{ callback_events : "attempt_id"
+    salons ||--o{ callback_events : "tenant_id"
+    refunds ||--o| credit_notes : "refund_id"
+    salons ||--o{ credit_notes : "tenant_id"
+    salons ||--o{ customer_profiles : "tenant_id"
+    users ||--o| customer_profiles : "user_id"
+    calendars ||--o{ day_overrides : "calendar_id"
+    salons ||--o{ day_overrides : "tenant_id"
+    employee_profiles ||--o{ employee_lines : "employee_id"
+    lines ||--o{ employee_lines : "line_id"
+    salons ||--o{ employee_lines : "tenant_id"
+    salons ||--o{ employee_profiles : "tenant_id"
+    users ||--o| employee_profiles : "user_id"
+    employee_lines ||--o{ employee_services : "employee_id,line_id"
+    line_services ||--o{ employee_services : "line_id,service_id"
+    salons ||--o{ employee_services : "tenant_id"
+    refunds o|--o{ financial_entries : "refund_id,transaction_id,amount,currency,is_test"
+    salons ||--o{ financial_entries : "tenant_id"
+    payment_transactions ||--o{ financial_entries : "transaction_id,captured_amount,currency,is_test"
+    users ||--o{ idempotency_records : "actor_id"
+    salons ||--o{ idempotency_records : "tenant_id"
+    appointment_items ||--o{ invoice_items : "appointment_item_id,appointment_id"
+    invoices ||--o{ invoice_items : "invoice_id,appointment_id"
+    salons ||--o{ invoice_items : "tenant_id"
+    appointments ||--o| invoices : "appointment_id,total_amount,currency,is_test"
+    salons ||--o{ invoices : "tenant_id"
+    lines ||--o{ line_services : "line_id"
+    salons ||--o{ line_services : "tenant_id"
+    services ||--o{ line_services : "service_id"
+    salons ||--o{ lines : "tenant_id"
+    payment_accounts ||--o{ mock_orders : "account_id"
+    salons ||--o{ mock_orders : "tenant_id"
+    mock_orders ||--o{ mock_refunds : "order_id"
+    salons ||--o{ mock_refunds : "tenant_id"
+    salons ||--o{ notifications : "tenant_id"
+    users ||--o{ notifications : "user_id"
+    salons ||--o{ outbox_events : "tenant_id"
+    salons ||--o{ payment_accounts : "tenant_id"
+    payment_intents ||--o| payment_allocations : "intent_id,amount,currency,is_test"
+    salons ||--o{ payment_allocations : "tenant_id"
+    payment_transactions ||--o| payment_allocations : "transaction_id,intent_id,amount,currency,is_test"
+    payment_accounts ||--o{ payment_attempts : "account_id,is_test"
+    payment_intents ||--o{ payment_attempts : "intent_id,amount,currency,is_test"
+    salons ||--o{ payment_attempts : "tenant_id"
+    appointments ||--o| payment_intents : "appointment_id,amount,currency,is_test"
+    salons ||--o{ payment_intents : "tenant_id"
+    payment_attempts ||--o{ payment_transactions : "attempt_id,intent_id,account_id,currency,is_test"
+    salons ||--o{ payment_transactions : "tenant_id"
+    platform_users o|--o{ platform_audit_logs : "actor_id"
+    platform_roles ||--o{ platform_role_assignments : "role_id"
+    platform_users ||--o{ platform_role_assignments : "user_id"
+    permissions ||--o{ platform_role_permissions : "permission_code"
+    platform_roles ||--o{ platform_role_permissions : "role_id"
+    platform_users ||--o{ platform_sessions : "user_id"
+    salons ||--o{ receipts : "tenant_id"
+    payment_transactions ||--o| receipts : "transaction_id,amount,currency,is_test"
+    users o|--o{ refunds : "approved_by_id"
+    users o|--o{ refunds : "requested_by_id"
+    salons ||--o{ refunds : "tenant_id"
+    payment_transactions ||--o{ refunds : "transaction_id,captured_amount,currency,is_test"
+    users o|--o{ role_assignments : "granted_by_id"
+    lines o|--o{ role_assignments : "line_id"
+    roles ||--o{ role_assignments : "role_id"
+    salons ||--o{ role_assignments : "tenant_id"
+    users ||--o{ role_assignments : "user_id"
+    permissions ||--o{ role_permissions : "permission_code"
+    roles ||--o{ role_permissions : "role_id"
+    salons ||--o{ role_permissions : "tenant_id"
+    salons ||--o{ roles : "tenant_id"
+    salons ||--o| salon_settings : "tenant_id"
+    users o|--o{ schedule_blocks : "approved_by_id"
+    calendars ||--o{ schedule_blocks : "calendar_id"
+    users o|--o{ schedule_blocks : "requested_by_id"
+    salons ||--o{ schedule_blocks : "tenant_id"
+    salons ||--o{ services : "tenant_id"
+    salons ||--o{ sessions : "tenant_id"
+    users ||--o{ sessions : "user_id"
+    day_overrides ||--o{ special_periods : "override_id,override_mode"
+    salons ||--o{ special_periods : "tenant_id"
+    platform_users ||--o{ support_grants : "platform_user_id"
+    salons ||--o{ support_grants : "tenant_id"
+    salons ||--o{ tenant_domains : "tenant_id"
+    salons ||--o{ users : "tenant_id"
+    calendars ||--o{ weekly_periods : "calendar_id"
+    salons ||--o{ weekly_periods : "tenant_id"

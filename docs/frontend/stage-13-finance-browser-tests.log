@@ -1,0 +1,40 @@
+
+Running 2 tests using 1 worker
+
+(node:18704) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  x  1 e2e\finance.spec.ts:36:1 › manager reports real mock evidence, requests and approves partial refund, reads invoice (16.2s)
+(node:12740) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ok 2 e2e\finance.spec.ts:187:1 › line manager has scoped read-only finance and employees cannot enter (10.7s)
+
+
+  1) e2e\finance.spec.ts:36:1 › manager reports real mock evidence, requests and approves partial refund, reads invoice 
+
+    Error: expect(locator).toContainText(expected) failed
+
+    Locator: getByRole('alert')
+    Expected substring: "حداکثر ۳۶۶ روز"
+    Error: strict mode violation: getByRole('alert') resolved to 2 elements:
+        1) <p role="alert" class="form-error">بازه‌ای معتبر، حداکثر ۳۶۶ روز، انتخاب کنید.</p> aka getByText('بازه‌ای معتبر، حداکثر ۳۶۶ روز، انتخاب کنید')
+        2) <div role="alert" aria-live="assertive" id="__next-route-announcer__"></div> aka locator('[id="__next-route-announcer__"]')
+
+    Call log:
+      - Expect "toContainText" getByRole('alert') with timeout 5000ms
+      - waiting for getByRole('alert')
+
+
+      175 |   await page.getByLabel("نوع گزارش").selectOption("custom");
+      176 |   await page.getByLabel("از تاریخ (میلادی)").fill("2025-01-01");
+    > 177 |   await expect(page.getByRole("alert")).toContainText("حداکثر ۳۶۶ روز");
+          |                                         ^
+      178 |   await page.getByLabel("از تاریخ (میلادی)").fill(settings.today);
+      179 |   await page.setViewportSize({ width: 390, height: 844 });
+      180 |   await page.getByRole("button", { name: /تغییر پوسته/ }).click();
+        at G:\Projects\SalonBook\frontend\e2e\finance.spec.ts:177:41
+
+    Error Context: test-results\finance-manager-reports-re-002ee-artial-refund-reads-invoice\error-context.md
+
+  1 failed
+    e2e\finance.spec.ts:36:1 › manager reports real mock evidence, requests and approves partial refund, reads invoice 
+  1 passed (29.9s)

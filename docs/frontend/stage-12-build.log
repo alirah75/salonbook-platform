@@ -1,0 +1,44 @@
+
+> salonbook-web@0.1.0 build
+> next build
+
+▲ Next.js 16.3.8 (Turbopack)
+- Environments: .env.local
+✓ Running next.config.ts took 39ms
+
+  Creating an optimized production build ...
+✓ Compiled successfully in 676ms
+  Running TypeScript ...
+  Finished TypeScript in 3.0s ...
+  Collecting page data using 7 workers ...
+  Generating static pages using 7 workers (0/13) ...
+  Generating static pages using 7 workers (3/13) 
+  Generating static pages using 7 workers (6/13) 
+  Generating static pages using 7 workers (9/13) 
+✓ Generating static pages using 7 workers (13/13) in 553ms
+  Finalizing page optimization ...
+
+Route (app)
+┌ ○ /
+├ ○ /_not-found
+├ ○ /account
+├ ƒ /api/v1/[...path]
+├ ○ /appointments
+├ ƒ /appointments/[id]
+├ ○ /booking
+├ ○ /dashboard
+├ ƒ /dashboard/[section]
+├ ○ /forgot-password
+├ ○ /icon.svg
+├ ƒ /login
+├ ƒ /payments/[id]
+├ ƒ /payments/[id]/result
+├ ○ /platform
+├ ƒ /platform/api/v1/[...path]
+├ ƒ /register
+└ ○ /services
+
+
+○  (Static)   prerendered as static content
+ƒ  (Dynamic)  server-rendered on demand
+

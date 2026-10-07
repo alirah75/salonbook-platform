@@ -1,0 +1,21 @@
+
+> salonbook-web@0.1.0 test:e2e
+> playwright test
+
+
+Running 10 tests using 1 worker
+
+(node:23524) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ok  1 e2e\auth.spec.ts:4:1 › Persian mobile registration, real session, reload and logout (4.3s)
+  ok  2 e2e\booking.spec.ts:60:1 › guest resumes booking, paid receipt, reschedule, cancellation and refund (16.4s)
+  ok  3 e2e\booking.spec.ts:133:1 › free booking on mobile; slot conflict is handled without duplicate reservation (10.3s)
+  ok  4 e2e\booking.spec.ts:186:1 › failed attempt can retry; delayed payment reconciles after reload (45.3s)
+  ok  5 e2e\booking.spec.ts:216:1 › lost booking response retries the same command after reload (4.6s)
+  ok  6 e2e\dashboard.spec.ts:48:1 › manager manages staff, custom role, catalog and calendar through real API (16.3s)
+  ok  7 e2e\dashboard.spec.ts:201:1 › line manager sees only their line and cannot access tenant accounts (8.9s)
+  ok  8 e2e\dashboard.spec.ts:224:1 › employee requests leave and manager approves it (14.2s)
+  ok  9 e2e\dashboard.spec.ts:280:1 › platform mobile login creates and suspends a salon with audit (9.8s)
+  ok 10 e2e\dashboard.spec.ts:349:1 › staff booking workflow keeps employee amounts private and supports manager reschedule and cancel (12.5s)
+
+  10 passed (2.4m)

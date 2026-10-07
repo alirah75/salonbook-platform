@@ -1,0 +1,12 @@
+
+> salonbook-web@0.1.0 test:e2e
+> playwright test dashboard.spec.ts --grep manager manages
+
+
+Running 1 test using 1 worker
+
+(node:24196) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ok 1 e2e\dashboard.spec.ts:46:1 › manager manages staff, custom role, catalog and calendar through real API (19.1s)
+
+  1 passed (21.3s)

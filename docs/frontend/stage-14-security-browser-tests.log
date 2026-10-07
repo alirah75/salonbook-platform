@@ -1,0 +1,9 @@
+
+Running 2 tests using 1 worker
+
+(node:20164) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ok 1 e2e\security.spec.ts:4:1 › stored markup remains text and foreign-origin mutations are rejected (2.5s)
+  ok 2 e2e\security.spec.ts:49:1 › production CSP permits hydration but blocks injected script and uses fresh nonces (1.0s)
+
+  2 passed (14.5s)

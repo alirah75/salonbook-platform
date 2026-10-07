@@ -1,0 +1,25 @@
+
+> salonbook-web@0.1.0 test:e2e
+> playwright test
+
+
+Running 14 tests using 1 worker
+
+(node:10788) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ok  1 e2e\auth.spec.ts:4:1 › Persian mobile registration, real session, reload and logout (6.9s)
+  ok  2 e2e\booking.spec.ts:60:1 › guest resumes booking, paid receipt, reschedule, cancellation and refund (17.5s)
+  ok  3 e2e\booking.spec.ts:133:1 › free booking on mobile; slot conflict is handled without duplicate reservation (12.1s)
+  ok  4 e2e\booking.spec.ts:186:1 › failed attempt can retry; delayed payment reconciles after reload (43.4s)
+  ok  5 e2e\booking.spec.ts:216:1 › lost booking response retries the same command after reload (9.5s)
+  ok  6 e2e\dashboard.spec.ts:48:1 › manager manages staff, custom role, catalog and calendar through real API (20.8s)
+  ok  7 e2e\dashboard.spec.ts:201:1 › line manager sees only their line and cannot access tenant accounts (10.2s)
+  ok  8 e2e\dashboard.spec.ts:224:1 › employee requests leave and manager approves it (15.6s)
+  ok  9 e2e\dashboard.spec.ts:280:1 › platform mobile login creates and suspends a salon with audit (10.3s)
+  ok 10 e2e\dashboard.spec.ts:349:1 › staff booking workflow keeps employee amounts private and supports manager reschedule and cancel (14.7s)
+  ok 11 e2e\finance.spec.ts:36:1 › manager reports real mock evidence, requests and approves partial refund, reads invoice (13.3s)
+  ok 12 e2e\finance.spec.ts:189:1 › line manager has scoped read-only finance and employees cannot enter (10.4s)
+  ok 13 e2e\security.spec.ts:4:1 › stored markup remains text and foreign-origin mutations are rejected (1.8s)
+  ok 14 e2e\security.spec.ts:49:1 › production CSP permits hydration but blocks injected script and uses fresh nonces (766ms)
+
+  14 passed (3.3m)

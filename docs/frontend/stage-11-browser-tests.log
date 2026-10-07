@@ -1,0 +1,16 @@
+
+> salonbook-web@0.1.0 test:e2e
+> playwright test
+
+
+Running 5 tests using 1 worker
+
+(node:16324) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ok 1 e2e\auth.spec.ts:4:1 › Persian mobile registration, real session, reload and logout (5.0s)
+  ok 2 e2e\booking.spec.ts:57:1 › guest resumes booking, paid receipt, reschedule, cancellation and refund (16.5s)
+  ok 3 e2e\booking.spec.ts:130:1 › free booking on mobile; slot conflict is handled without duplicate reservation (9.8s)
+  ok 4 e2e\booking.spec.ts:183:1 › failed attempt can retry; delayed payment reconciles after reload (45.0s)
+  ok 5 e2e\booking.spec.ts:213:1 › lost booking response retries the same command after reload (5.5s)
+
+  5 passed (1.4m)
